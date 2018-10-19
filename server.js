@@ -31,6 +31,6 @@ server.get('/', (req, res) => {
 })
 
 
-http.createServer(server, function (req, res) {
+http.createServer(server).listen(3000, () => {
 	console.log(colors.yellow.bold('Server started: http://localhost:3000/'));
-}).listen(3000);
+});
