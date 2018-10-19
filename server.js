@@ -3,8 +3,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // uncomment for secure server
 import React from 'react'
 import express from 'express'
 import http from 'http';
-import https from 'https';
-import fs from 'fs';
 import { renderToString } from 'react-dom/server'
 import renderPage from './src/renderPage'
 import App from './src/App'
@@ -33,18 +31,6 @@ server.get('/', (req, res) => {
 })
 
 
-
-var key = fs.readFileSync('./ssl/localhost.key');
-var cert = fs.readFileSync('./ssl/localhost.crt');
-
-http.createServer(function (req, res) {
-	res.writeHead(301, { "Location": "https://localhost:8081" + req.url });
-	res.end();
-}).listen(8080);
-
-https.createServer({
-	key: key,
-	cert: cert
-}, server).listen(8081, '0.0.0.0', function () {
-	console.log(colors.yellow.bold('Server started: https://localhost:8081/'));
-});
+http.createServer(server, function (req, res) {
+	console.log(colors.yellow.bold('Server started: http://localhost:3000/'));
+}).listen(3000);

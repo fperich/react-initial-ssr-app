@@ -1,10 +1,6 @@
 // const webpack = require('webpack')
 const path = require('path');
-const fs = require('fs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-var key = fs.readFileSync('./ssl/localhost.key');
-var cert = fs.readFileSync('./ssl/localhost.crt');
 
 module.exports = {
     entry: [path.join(__dirname, 'src', 'index.js')],
@@ -40,10 +36,7 @@ module.exports = {
     devServer: {
         contentBase: './public',
         host: 'localhost',
-        port: 8081,
-        https: true,
-        cert: cert,
-        key: key,
+        port: 3000,
         compress: false,
         historyApiFallback: {
             rewrites: [
